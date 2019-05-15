@@ -1,0 +1,4 @@
+SELECT SUM(dp_produk.qty) permintaan, produk.nama_produk, dp_produk.tgl_pemesanan
+FROM tb_detail_pemesan_produk dp_produk
+INNER JOIN tb_produk produk ON dp_produk.id_produk= produk.id_produk WHERE MONTH(tgl_pemesanan) = 7 AND YEAR(tgl_pemesanan) = 2018
+GROUP BY dp_produk.id_produk

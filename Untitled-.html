@@ -1,0 +1,43 @@
+<legend> .</legend>
+                            <div class="form-group  ">
+                                <label for="Daftar Bahan Baku" class=" control-label col-md-2 text-left"> Daftar Bahan Baku </label>
+                                <div class="col-md-8">
+                                    <div class="btn btn-info btn-sm" id="add-more" onClick="createNew();">Tambah</div>
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="table-header">Bahan Baku</th>
+                                                <th class="table-header">Jumlah Kebutuhan</th>
+                                                <th class="table-header">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="table-body">
+                                            <?php if(!empty($rows)) {  ?>
+                                            <?php	foreach($rows as $k=>$v) { ?>
+                                            <tr class="table-row" id="table-row-<?php echo $rows[$k][" id_bom "]; ?>">
+                                                <td contenteditable="true" onClick="editRow(this);">
+                                                    <select name="required[<?php echo $id;?>]" id="required" class="form-control" style="width:150px;" onBlur="saveToDatabase(this,'id_bahan_baku','<?php echo $rows[$k]["
+                                                        id_bom "]; ?>')">
+                                                        <?php foreach($tb_bahan_baku as $item) { ?>
+                                                        <option value="<?php echo $item['id_bahan_baku'];?>" <?php if($rows[$k][ "id_bahan_baku"]==$item[ 'id_bahan_baku']) echo
+                                                            'selected="selected"';?>>
+                                                            <?php echo $item['nama_bahan_baku'];?>&nbsp
+                                                            <?php echo $item['jenis_bahan_baku'];?>
+                                                        </option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </td>
+                                                <td contenteditable="true">
+                                                    <input type="number" min="6" onBlur="saveToDatabase(this,'jumlah_kebutuhan','<?php echo $rows[$k][" id_bom "]; ?>')" onClick="editRow(this);"
+                                                        value="<?php echo $rows[$k][" jumlah_kebutuhan "]; ?>" />
+                                                </td>
+                                                <td>
+                                                    <a class="ajax-action-links" onclick="deleteRecord(<?php echo $rows[$k][" id_bom "]; ?>);">Delete</a>
+                                                </td>
+                                            </tr>
+                                            <?php }
+                                            }?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
